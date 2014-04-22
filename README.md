@@ -20,6 +20,9 @@ To generate a constant sized tile canvas with a fixed color (only tile shading c
 </script>
 ```
 
+## Demo
+A live demo of this library can be found at: http://dbcoding.com/Grid-JS
+
 ## Contributors
 Devon Bernard
 * dwbcoding@gmail.com
