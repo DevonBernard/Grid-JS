@@ -122,7 +122,7 @@ function setBox(imageData, x, y, size, RGB, a) {
   }
 }
 
-function fixedSimilarGrid(options){
+function fixedMonochromeGrid(options){
   element = document.getElementById(options.id);
   element.width = options.width;
   element.height = options.height;
@@ -135,10 +135,36 @@ function fixedSimilarGrid(options){
     for(y = 0; y < options.height; y+=options.tileSize+options.gap){
     
         a = Math.random() * (options.alphaRange[0] - options.alphaRange[1])+options.alphaRange[1];
-        
         l =( Math.random() * (options.lightRange[0] - options.lightRange[1])+options.lightRange[1])/100;
         var HSV = RGBtoHSV(options.rgb);
         var RGB = HSVtoRGB(HSV.h, HSV.s, HSV.v+l);
+        setBox(imageData, x, y, options.tileSize, RGB, a); // 255 opaque
+    }
+  }
+
+  c.putImageData(imageData, 0, 0); // at coords 0,0 
+}
+
+function fixedPolychromeGrid(options){
+  element = document.getElementById(options.id);
+  element.width = options.width;
+  element.height = options.height;
+  element.style.backgroundColor = "rgba("+options.backgroundColor[0]+", "+options.backgroundColor[1]+", "+options.backgroundColor[2]+", 1)";
+  c = element.getContext("2d");
+
+  imageData = c.createImageData(options.width, options.height);
+
+  for(x = 0; x < options.width; x+=options.tileSize+options.gap){
+    for(y = 0; y < options.height; y+=options.tileSize+options.gap){
+        var RGB = [
+          Math.random() * (options.rgb.r[0] - options.rgb.r[1])+options.rgb.r[1],
+          Math.random() * (options.rgb.g[0] - options.rgb.g[1])+options.rgb.g[1],
+          Math.random() * (options.rgb.b[0] - options.rgb.b[1])+options.rgb.b[1]
+        ];
+        a = Math.random() * (options.alphaRange[0] - options.alphaRange[1])+options.alphaRange[1];
+        l =( Math.random() * (options.lightRange[0] - options.lightRange[1])+options.lightRange[1])/100;
+        var HSV = RGBtoHSV(RGB);
+        RGB = HSVtoRGB(HSV.h, HSV.s, HSV.v+l);
         setBox(imageData, x, y, options.tileSize, RGB, a); // 255 opaque
     }
   }
