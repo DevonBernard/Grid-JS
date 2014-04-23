@@ -138,11 +138,11 @@ function fixedMonochromeGrid(options){
         l =( Math.random() * (options.lightRange[0] - options.lightRange[1])+options.lightRange[1])/100;
         var HSV = RGBtoHSV(options.rgb);
         var RGB = HSVtoRGB(HSV.h, HSV.s, HSV.v+l);
-        setBox(imageData, x, y, options.tileSize, RGB, a); // 255 opaque
+        setBox(imageData, x, y, options.tileSize, RGB, a);
     }
   }
 
-  c.putImageData(imageData, 0, 0); // at coords 0,0 
+  c.putImageData(imageData, 0, 0);
 }
 
 function fixedPolychromeGrid(options){
@@ -165,9 +165,9 @@ function fixedPolychromeGrid(options){
         l =( Math.random() * (options.lightRange[0] - options.lightRange[1])+options.lightRange[1])/100;
         var HSV = RGBtoHSV(RGB);
         RGB = HSVtoRGB(HSV.h, HSV.s, HSV.v+l);
-        setBox(imageData, x, y, options.tileSize, RGB, a); // 255 opaque
+        setBox(imageData, x, y, options.tileSize, RGB, a);
     }
   }
 
-  c.putImageData(imageData, 0, 0); // at coords 0,0 
+  c.putImageData(imageData, 0, 0);
 }

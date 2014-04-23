@@ -2,17 +2,81 @@
 	<head>
 		<title>Grid JS</title>
 		<script type="text/javascript" src="./grid.js"></script>
+		
+		<!-- SCRIPTS FOR SLIDE OUT MENU -->
+		<link rel="stylesheet"  href="http://demos.jquerymobile.com/1.3.0-beta.1/css/themes/default/jquery.mobile-1.3.0-beta.1.css" />
+		<link rel="stylesheet" href="http://demos.jquerymobile.com/1.3.0-beta.1/docs/_assets/css/jqm-docs.css"/>
+	
+		<script src="//code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script src="http://demos.jquerymobile.com/1.3.0-beta.1/docs/_assets/js/jqm-docs.js"></script>
+		<script src="http://demos.jquerymobile.com/1.3.0-beta.1/js/jquery.mobile-1.3.0-beta.1.js"></script>
+		<!--------------- -------------->
 	</head>
 	<body>
-		<canvas id="canvas">
+	<div data-role="page">	
+		<a href="#mypanel"><div style="z-index:10;position:absolute;top: 0;left:0;height:100%"><img src="slider.png" style="height:100%;"></div></a>
+		<canvas id="canvas" style="position:absolute;top:0;left:0;">
 			Grid Canvas
-		</canvas>
+		</canvas>		
+
+    		<div class="ui-panel ui-panel-position-left ui-panel-display-overlay ui-body-b ui-panel-animate ui-panel-open" data-role="panel" data-position="left" data-position-fixed="false" data-display="push" id="mypanel" data-theme="b">
+
+			<div class="ui-panel-inner">
+				<form class="userform" id="canvasForm">
+					<h2>Change Settings</h2>
+					<label class="ui-input-text" for="name">Height</label>
+					<input class="ui-input-text ui-body-b" name="height" id="canvasHeight" value="" data-clear-btn="true" data-mini="true" type="text" placeholder="800">
+
+					<label for="email">Width</label>
+					<input class="ui-input-text ui-body-b" name="width" id="canvasWidth" value="" data-clear-btn="true" data-mini="true" type="text" placeholder="1600">
+						
+					<label for="email">tileSize</label>
+					<input class="ui-input-text ui-body-b" name="tileSize" id="canvasTileSize" value="" data-clear-btn="true" data-mini="true" type="text" placeholder="40">
+						
+					<label for="email">Gap</label>
+					<input class="ui-input-text ui-body-b" name="gap" id="canvasGap" value="" data-clear-btn="true" data-mini="true" type="text" placeholder="3">
+						
+					<label for="email">Monochrome Color</label>
+					<input class="ui-input-text ui-body-b" name="rgb" id="canvasRgb" value="" data-clear-btn="true" data-mini="true" type="text" placeholder="[r, g, b]">
+						
+					<label for="email">Alpha Range</label>
+					<input class="ui-input-text ui-body-b" name="alphaRange" id="canvasAlphaRange" value="" data-clear-btn="true" data-mini="true" type="text" placeholder="[max, min]">
+					<label for="email">Light Range</label>
+					<input class="ui-input-text ui-body-b" name="lightRange" id="canvasLightRange" value="" data-clear-btn="true" data-mini="true" type="text" placeholder="[max, min]">
+					<label for="email">Background Color</label>
+					<input class="ui-input-text ui-body-b" name="backgroundColor" id="canvasBackgroundColor" value="" data-clear-btn="true" data-mini="true" type="text" placeholder="[r, g, b]">
+
+					<div class="ui-grid-a">
+						<div class="ui-block-a"><a class="ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all ui-mini" data-wrapperels="span" data-iconshadow="true" data-shadow="true" data-corners="true" href="#" data-rel="close" data-role="button" data-theme="c" data-mini="true"><span class="ui-btn-inner"><span class="ui-btn-text">Cancel</span></span></a></div>
+						<div class="ui-block-b"><a class="ui-btn ui-shadow ui-btn-corner-all ui-mini ui-btn-up-b" data-wrapperels="span" data-iconshadow="true" data-shadow="true" data-corners="true" href="#" data-rel="close" data-role="button" data-theme="b" data-mini="true" onclick="updateCanvas();"><span class="ui-btn-inner"><span class="ui-btn-text" >Update</span></span></a></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
 		<script type="text/javascript">
-			/*var monochomeOptions = {
+			function updateCanvas(){
+			
+				var monochromeOptions = {
+					id: "canvas",
+					width: parseInt(document.getElementById("canvasWidth").value),
+					height: parseInt(document.getElementById("canvasHeight").value),
+					tileSize: parseInt(document.getElementById("canvasTileSize").value),
+					gap:  parseInt(document.getElementById("canvasGap").value),
+					rgb: JSON.parse(document.getElementById("canvasRgb").value),
+					alphaRange: JSON.parse(document.getElementById("canvasAlphaRange").value),
+					lightRange: JSON.parse(document.getElementById("canvasLightRange").value),
+					backgroundColor: JSON.parse(document.getElementById("canvasBackgroundColor").value)
+				};
+				
+				fixedMonochromeGrid(monochromeOptions);
+				
+			}
+			var monochromeOptions = {
 				id: "canvas",
-				width: 1600,
-				height: 800,
+				width: document.body.clientWidth,
+				height: document.body.clientHeight,
 				tileSize: 40,
 				gap: 2,
 				rgb: [50,233,180],
@@ -20,12 +84,13 @@
 				lightRange: [20, -20],
 				backgroundColor: [30, 210, 160]
 			};
-			fixedMonochromeGrid(monochromeOptions);*/
+			fixedMonochromeGrid(monochromeOptions);
 
-			var polychromeOptions = {
+			/*var polychromeOptions = {
 				id: "canvas",
-				width: 1600,
-				height: 800,
+				
+				width: document.body.clientWidth,
+				height: document.body.clientHeight,
 				tileSize: 40,
 				gap: 2,
 				rgb: {
@@ -37,7 +102,7 @@
 				lightRange: [20, -20],
 				backgroundColor: [30, 30, 30]
 			};	
-			fixedPolychromeGrid(polychromeOptions);		
+			fixedPolychromeGrid(polychromeOptions);	*/	
 		</script>
 	</body>
 </html>
