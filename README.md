@@ -49,6 +49,7 @@ To generate a canvas with tiles of constant size and many different colors (poly
 
 ## Demo
 A live demo of this library can be found at: http://dbcoding.com/Grid-JS
+In this demo you can select any grid parameter ranges you wish and asyncronously update a canvas for easy downloads.
 
 ## Contributors
 Devon Bernard
